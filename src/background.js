@@ -18,9 +18,10 @@ function inject() {
   });
 }
 
-chrome.runtime.onMessage.addListener(function(details) {
-  console.log("details, ");
-  console.log(details);
+chrome.runtime.onMessage.addListener(function(data) {
+  firebase.database().ref('currently-playing').set({
+    track: data.track
+  });
 });
 
 chrome.webNavigation.onCompleted.addListener(function(details) {
