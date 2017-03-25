@@ -1,19 +1,25 @@
-function pushNowPlaying(name) {
-  chrome.runtime.sendMessage("gjkcapoheblcajplncmgpcbpdmccciie", {track: name}, (response) => {});
+function pushNowPlaying(data) {
+  console.log(data);
+  chrome.runtime.sendMessage("gjkcapoheblcajplncmgpcbpdmccciie", data, (response) => {});
 }
 
 function findNowPlaying() {
   var trackNameEl = null;
+  var trackArtistEl = null;
 
   function loop() {
     playerIframe = document.getElementById("app-player");
     if (playerIframe) {
       playerFrameDoc = playerIframe.contentWindow.document;
       trackNameEl = playerFrameDoc.querySelector("#track-name a");
+      trackArtistEl = playerFrameDoc.querySelector("#track-artist a");
     }
-    console.log(trackNameEl);
-    if (trackNameEl) {
-      pushNowPlaying(trackNameEl.innerText);
+
+    if (trackNameEl && trackArtistEl) {
+      pushNowPlaying({
+        name: trackNameEl.innerText,
+        artist: trackArtistEl.innerText
+      });
     }
   }
 
