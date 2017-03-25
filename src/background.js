@@ -18,10 +18,20 @@ function inject() {
   });
 }
 
+
+var roomName = null;
+var currentlyPlaying = null;
 chrome.runtime.onMessage.addListener(function(data) {
-  firebase.database().ref('currently-playing').set({
-    track: data.track
-  });
+  if (data.room) {
+    console.log("Updated room to " + data.room);
+    roomName = data.room;
+  }
+  else if (roomName && currentlyPlaying != data.track) {
+    currentlyPlaying = data.track;
+    firebase.database().ref(roomName + '/currently-playing').set({
+      track: data.track
+    });
+  }
 });
 
 chrome.webNavigation.onCompleted.addListener(function(details) {

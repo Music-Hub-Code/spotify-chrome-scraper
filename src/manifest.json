@@ -3,11 +3,13 @@
    "description": "Monitor the currently playing track on play.spotify.com.",
    "version": "0.1",
    "manifest_version": 2,
-
    "background": {
       "persistent": true,
       "page": "background.html"
    },
-   "content_security_policy": "script-src 'self' https://www.gstatic.com/firebasejs/3.7.3/firebase.js; object-src 'self'",
+   "browser_action": {
+     "default_popup": "popup.html"
+   },
+   "content_security_policy": "script-src 'self' https://www.gstatic.com/firebasejs/3.7.3/firebase.js https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js; object-src 'self'",
    "permissions": [ "tabs", "webNavigation", "https://open.spotify.com/*", "https://play.spotify.com/*" ]
 }

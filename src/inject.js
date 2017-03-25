@@ -1,6 +1,5 @@
 function pushNowPlaying(name) {
-  chrome.runtime.sendMessage("gjkcapoheblcajplncmgpcbpdmccciie", {track: name}, (response) => {
-    });
+  chrome.runtime.sendMessage("gjkcapoheblcajplncmgpcbpdmccciie", {track: name}, (response) => {});
 }
 
 function findNowPlaying() {
