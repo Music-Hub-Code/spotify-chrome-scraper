@@ -20,18 +20,20 @@ function inject() {
 
 
 var roomName = null;
-var currentlyPlaying = null;
+var currentlyPlaying = {name: null, artist: null};
 chrome.runtime.onMessage.addListener(function(data) {
   if (data.room) {
     console.log("Updated room to " + data.room);
     roomName = data.room;
   }
-  else if (roomName && currentlyPlaying != data.name && currentlyPlaying != data.artist) {
+  else if (roomName && currentlyPlaying.name != data.name && currentlyPlaying.artist != data.artist) {
     currentlyPlaying = data;
     var updates = {};
     updates['/name'] = data.name;
     updates['/artist'] = data.artist;
     updates['/trackId'] = data.trackId;
+    updates['/rating'] = 0;
+    updates['/ratingCount'] = 0;
     firebase.database().ref("rooms/" + roomName + '/current').update(updates);
   }
 });
