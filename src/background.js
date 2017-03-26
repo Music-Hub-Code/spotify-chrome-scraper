@@ -28,11 +28,11 @@ chrome.runtime.onMessage.addListener(function(data) {
   }
   else if (roomName && currentlyPlaying != data.name && currentlyPlaying != data.artist) {
     currentlyPlaying = data;
-    firebase.database().ref("rooms/" + roomName + '/current').set({
-      name: data.name,
-      artist: data.artist,
-      trackId: data.trackID
-    });
+    var updates = {};
+    updates['/name'] = data.name;
+    updates['/artist'] = data.artist;
+    updates['/trackId'] = data.trackId;
+    firebase.database().ref("rooms/" + roomName + '/current').update(updates);
   }
 });
 

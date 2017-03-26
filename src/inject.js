@@ -1,6 +1,6 @@
 function pushNowPlaying(data) {
   console.log(data);
-  chrome.runtime.sendMessage("hnhjaebhalmancjhbiekecemgllhaecj", data, (response) => {});
+  chrome.runtime.sendMessage("gjkcapoheblcajplncmgpcbpdmccciie", data, (response) => {});
 }
 
 function findNowPlaying() {
@@ -16,11 +16,11 @@ function findNowPlaying() {
     }
 
     if (trackNameEl && trackArtistEl) {
-      var trackID = trackNameEl.href.split('/track/')[1];
+      var trackId = trackNameEl.href.split('/track/')[1];
       pushNowPlaying({
         name: trackNameEl.innerText,
         artist: trackArtistEl.innerText,
-	trackID: trackID
+	      trackId: trackId
       });
     }
   }
