@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener(function(data) {
     firebase.database().ref("rooms/" + roomName + '/current').set({
       name: data.name,
       artist: data.artist,
-      'track-id': data.trackID
+      trackId: data.trackID
     });
   }
 });
