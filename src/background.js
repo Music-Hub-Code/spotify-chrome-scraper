@@ -9,7 +9,7 @@ firebase.initializeApp(config);
 
 
 function inject() {
-  chrome.tabs.query({url: 'https://*.spotify.com/*'}, function(tabs) {
+  chrome.tabs.query({url: 'https://play.spotify.com/*'}, function(tabs) {
     if (tabs.length != 0) {
       console.log("injecting...");
       console.log(tabs);
@@ -30,7 +30,8 @@ chrome.runtime.onMessage.addListener(function(data) {
     currentlyPlaying = data;
     firebase.database().ref("rooms/" + roomName + '/current').set({
       name: data.name,
-      artist: data.artist
+      artist: data.artist,
+      'track-id': data.trackID
     });
   }
 });
